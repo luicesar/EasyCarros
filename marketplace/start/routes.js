@@ -10,3 +10,10 @@ Route.post("passwords", "ForgotPasswordController.store").validator(
 Route.put("passwords", "ForgotPasswordController.update").validator(
   "ResetPassword"
 );
+
+// Route.group => Rotinas especificas para usuarios que estao logados
+Route.group(() => {
+  Route.resource("partners", "PartnerController")
+    .apiOnly()
+    .validator(new Map([[["partners.index"], ["Partner"]]]));
+}).middleware(["auth"]);
