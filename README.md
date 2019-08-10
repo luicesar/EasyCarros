@@ -19,7 +19,7 @@ The goal of this project is implement the most common used technologies with the
 Authorization tokens JWT Bearer
 
 # How to use:
-You will need the latest Visual Code and the latest .NET Core SDK. Tools can be downloaded from https://dotnet.microsoft.com/download. Also you can run the WebApi in Visual Code (Windows, Linux or MacOS).
+You will need the latest Visual Code and the latest version Node.JS
 
 - You must create the database named easycarros and execute script in insertation the data
 - Example for compiling a migration and create the tables: D:\EasyCarros\marketplace> adonis migration:run
