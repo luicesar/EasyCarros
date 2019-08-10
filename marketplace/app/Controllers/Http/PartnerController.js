@@ -1,8 +1,5 @@
 "use strict";
 
-// https://blog.rocketseat.com.br/adonis-upload-geolocalizacao/
-// https://github.com/Rocketseat/youtube-live-geolocation-e-mapas-backend/blob/master/src/app/controllers/PointController.js
-
 // CRIAR O CRUD DO PARTNET
 const Partner = use("App/Models/Partner");
 
@@ -14,6 +11,45 @@ class PartnerController {
       .fetch();
 
     return partners;
+  }
+
+  async store({ request }) {
+    const data = request.only([
+      "address_id",
+      "availableservices0",
+      "availableservices1"
+    ]);
+    const partner = await Partner.create({ ...data });
+
+    return partner;
+  }
+
+  async show({ params }) {
+    const partner = await Partner.findOrFail(params.id);
+
+    await partner.load("address");
+
+    return partner;
+  }
+
+  async update({ params, request }) {
+    const partner = await Partner.findOrFail(params.id);
+    const data = request.only([
+      "address_id",
+      "availableservices0",
+      "availableservices1"
+    ]);
+
+    partner.merge(data);
+
+    await partner.save();
+
+    return partner;
+  }
+
+  async destroy({ params }) {
+    const partner = await Partner.findOrFail(params.id);
+    await partner.delete();
   }
 }
 

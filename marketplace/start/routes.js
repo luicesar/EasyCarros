@@ -13,7 +13,13 @@ Route.put("passwords", "ForgotPasswordController.update").validator(
 
 // Route.group => Rotinas especificas para usuarios que estao logados
 Route.group(() => {
+  Route.get("services/:lat/:long", "RequestServiceController.show");
   Route.resource("partners", "PartnerController")
     .apiOnly()
-    .validator(new Map([[["partners.index"], ["Partner"]]]));
+    .validator(
+      new Map([
+        [["partners.store"], ["Partner"]],
+        [["partners.update"], ["Partner"]]
+      ])
+    );
 }).middleware(["auth"]);
